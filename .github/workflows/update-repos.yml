@@ -5,6 +5,10 @@ on:
     - cron: '0 0 * * 0' # Every Sunday at midnight UTC
   workflow_dispatch:
 
+permissions:
+  contents: write
+  actions: write
+
 jobs:
   update-repos:
     runs-on: ubuntu-latest
