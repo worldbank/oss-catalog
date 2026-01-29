@@ -14,7 +14,7 @@ export default function Header() {
   <h1 className="site-header-title">Open Source</h1>
       </Link>
   <div className="site-header-nav site-header-nav-desktop">
-  <Link href="/catalog" className="site-header-link">SOFTWARE CATALOG</Link>
+  <Link href="/catalog" className="site-header-link">CODE CATALOG</Link>
   <a href="https://github.com/worldbank" target="_blank" rel="noopener noreferrer" className="site-header-link">WB GITHUB</a>
   <a href="mailto:github@worldbank.org" className="site-header-link">CONTACT US</a>
       </div>
@@ -34,7 +34,7 @@ export default function Header() {
       </button>
       {menuOpen && (
   <div className="site-header-menu">
-          <Link href="/catalog" className="site-header-link">SOFTWARE CATALOG</Link>
+          <Link href="/catalog" className="site-header-link">CODE CATALOG</Link>
           <a href="https://github.com/worldbank" className="site-header-link">WB GITHUB</a>
           <a href="mailto:github@worldbank.org" className="site-header-link">CONTACT US</a>
         </div>
