@@ -1,14 +1,9 @@
 import type { NextConfig } from "next";
 
-// Only use basePath in production builds (GitHub Pages)
-// In development (npm run dev), serve from root
-const isProduction = process.env.NODE_ENV === 'production';
-const basePath = isProduction ? '/oss-catalog' : '';
-
+// Site is now served from custom domain (opensource.worldbank.org)
+// No basePath needed in production or development
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: basePath,
-  assetPrefix: basePath,
   images: {
     unoptimized: true,
   },
