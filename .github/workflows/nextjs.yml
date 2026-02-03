@@ -33,12 +33,8 @@ jobs:
           node-version: "20"
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          # Automatically inject basePath in your Next.js configuration file and disable
-          # server side image optimization (https://nextjs.org/docs/api-reference/next/image#unoptimized).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: next
+        # Removed static_site_generator to prevent automatic basePath injection
+        # since we're using a custom domain at the root
       # Remove package-lock.json to avoid internal registry references
       - name: Install dependencies
         run: npm install
