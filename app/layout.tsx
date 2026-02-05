@@ -23,7 +23,7 @@ wbgData.page = { pageInfo: { isDefaultPageName: "y", pageCategory: "home", conte
 wbgData.site = { siteInfo: { siteLanguage: "English", siteType: "opensource", siteEnv: "prod"}, techInfo: { cmsType: "github", bussVPUnit: "its", bussUnit: "itset", bussUserGroup: "external", bussAgency: "ibrd"}};`}
         </Script>
         <Script 
-          src="//assets.adobedtm.com/223f6e2cf7c9/3eb6c9b72a93/launch-5b03bcf083fb-development.min.js" 
+          src="//assets.adobedtm.com/223f6e2cf7c9/3eb6c9b72a93/launch-7bc0cdc67098.min.js"
           strategy="beforeInteractive"
         />
         {children}
