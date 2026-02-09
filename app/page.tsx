@@ -32,21 +32,9 @@ return (
     <Header />
     {/* Hero Section with image to the right, full-bleed background */}
     <div style={{ width: '100vw', position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', background: '#fff', boxShadow: '0 2px 16px 0 rgba(21,53,63,0.06)' }}>
-      <section
-        style={{
-          width: '100%',
-          padding: '0 0 2rem 0',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          position: 'relative',
-          minHeight: 'clamp(400px, 32vw, 600px)',
-          gap: '2rem',
-          overflow: 'hidden'
-        }}
-      >
+      <section className="homepage-hero-section">
         {/* Hero text left */}
-        <div style={{ flex: 1, minWidth: 320, maxWidth: 640, display: 'flex', flexDirection: 'column', justifyContent: 'center', zIndex: 1, alignItems: 'flex-start', marginLeft: '14.5rem' }}>
+        <div className="homepage-hero-text">
           <h2 className="hero-title" style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 600, color: '#15353F', letterSpacing: '-0.5px', marginBottom: '1rem' }}>
             World Bank and Open Source
           </h2>
@@ -57,7 +45,7 @@ return (
           </p>
         </div>
         {/* Hero image right */}
-        <div style={{ flex: 1, minWidth: 320, maxWidth: 640, display: 'flex', alignItems: 'center', justifyContent: 'flex-end', height: '100%', marginRight: '14rem' }}>
+        <div className="homepage-hero-image">
             <img
               src={getAssetPath("/img/code4.png")}
               alt="Hero Background"
@@ -78,15 +66,15 @@ return (
     {/* Main content area with margin */}
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
       {/* Two boxed areas side-by-side */}
-      <section style={{ width: '100%', display: 'flex', flexDirection: 'row', gap: '2.5rem', justifyContent: 'center', alignItems: 'stretch', margin: '4rem 0 4rem 0', padding: 0, boxSizing: 'border-box', maxWidth: 'calc(100vw - 28rem)', marginLeft: '14rem', marginRight: '14rem' }}>
+      <section className="homepage-boxes-section">
         {/* Software Catalog Box */}
-        <div style={{ flex: 1, background: '#fffcfcff', borderRadius: 12, boxShadow: '0 1px 4px rgba(25,118,210,0.08)', padding: 0, display: 'flex', flexDirection: 'row', alignItems: 'stretch', minHeight: 260 }}>
+        <div className="homepage-box">
           {/* Catalog image flush left */}
-          <div style={{ flex: '0 0 200px', height: '100%', borderTopLeftRadius: 12, borderBottomLeftRadius: 12, overflow: 'hidden' }}>
+          <div className="homepage-box-image">
             <img src={getAssetPath("/img/catalog.jpg")} alt="Catalog" width="200" height="260" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           {/* Catalog info */}
-          <div style={{ flex: 1, padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div className="homepage-box-content">
             <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: '#15353F', marginBottom: '1rem' }}>Open Source Code Catalog</h3>
             <p style={{ color: '#15353F', fontSize: '1rem', marginBottom: '1.5rem' }}>
               Browse our open source code, filter by topic, language, and popularity, and find tools for you to use or contribute.
@@ -122,13 +110,13 @@ return (
           </div>
         </div>
         {/* GitHub Organization Box */}
-        <div style={{ flex: 1, background: '#fffcfcff', borderRadius: 12, boxShadow: '0 1px 4px rgba(25,118,210,0.08)', padding: 0, display: 'flex', flexDirection: 'row', alignItems: 'stretch', minHeight: 260 }}>
+        <div className="homepage-box">
           {/* GitHub image flush left */}
-          <div style={{ flex: '0 0 200px', height: '100%', borderTopLeftRadius: 12, borderBottomLeftRadius: 12, overflow: 'hidden', background: '#24292f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="homepage-box-image" style={{ background: '#24292f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <img src={getAssetPath("/img/github.svg")} alt="GitHub" width="180" height="180" style={{ display: 'block' }} />
           </div>
           {/* GitHub info */}
-          <div style={{ flex: 1, padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div className="homepage-box-content">
             <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: '#15353F', marginBottom: '1rem' }}>GitHub Organization</h3>
             <p style={{ color: '#15353F', fontSize: '1rem', marginBottom: '1.5rem' }}>
               See all World Bank open source repositories, contribute, and join our developer community on GitHub.
@@ -168,7 +156,7 @@ return (
     </div>
     {/* Two-column section: Other Resources & Newest Additions (full-bleed) */}
     <div style={{ width: '100vw', position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', background: '#fff', boxShadow: '0 2px 16px 0 rgba(21,53,63,0.06)' }}>
-      <section style={{ width: '100%', display: 'flex', flexDirection: 'row', gap: '2.5rem', justifyContent: 'center', alignItems: 'flex-start', margin: '2rem 0 2rem 0', padding: 0, boxSizing: 'border-box', maxWidth: 'calc(100vw - 28rem)', marginLeft: '14rem', marginRight: '14rem' }}>
+      <section className="homepage-resources-section">
   <div style={{ flex: 1.25, padding: '2.2rem 2rem 2.2rem 2rem', minHeight: 220, display: 'flex', flexDirection: 'column', background: '#f5f6f8', borderRadius: 10, boxShadow: '0 1px 8px rgba(25,118,210,0.07)' }}>
           <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: '#15353F', marginBottom: '0.3rem', letterSpacing: '-0.5px' }}>Newest Additions to the Catalog</h3>
           <div style={{ width: '100%', height: 3, background: 'linear-gradient(90deg, #1976d2 20%, #f5f6f8 100%)', borderRadius: 2, marginBottom: '1.7rem' }} />

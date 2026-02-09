@@ -99,9 +99,9 @@ export default function CatalogNewPage() {
     >
       <Header />
       {/* Hero Section without summary stats box */}
-      <div style={{ width: '100vw', position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', background: 'linear-gradient(90deg, rgba(245,247,250,0.95) 0%, rgba(227,234,242,0.85) 50%, rgba(227,234,242,0.0) 90%), url(/img/bg.jpg)', backgroundSize: '100%', backgroundPosition: '0% 12%', backgroundRepeat: 'no-repeat', boxShadow: '0 2px 8px rgba(25, 118, 210, 0.10)', minHeight: 250 }}>
+      <div className="catalog-hero-container">
         <section style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '2.5rem 0 2rem 0', position: 'relative' }}>
-          <div style={{ marginLeft: '14rem', textAlign: 'left', width: '100%' }}>
+          <div className="catalog-hero-content">
             <h2
               style={{
                 fontFamily: 'Segoe UI',
@@ -130,7 +130,7 @@ export default function CatalogNewPage() {
               Browse, filter, and learn about open source code created by the World Bank. Find projects by topic, language, and popularity. Click a project card to learn more about the open source project. You can browse the code on GitHub and learn how to contribute.
             </p>
             {/* Search and filter controls moved from left nav */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center', marginTop: '2rem' }}>
+            <div className="catalog-filters-container">
               {/* Search */}
               <div style={{ position: 'relative', display: 'flex', alignItems: 'center', minHeight: 44 }}>
                 <img
@@ -206,20 +206,7 @@ export default function CatalogNewPage() {
         }}
       >
         {/* Main content */}
-        <section
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            justifyContent: "flex-start",
-            width: "100%",
-            maxWidth: "100%",
-            fontFamily: "Segoe UI, Inter, Arial, sans-serif",
-            paddingLeft: '14rem',
-            paddingRight: '14rem',
-            boxSizing: "border-box"
-          }}
+        <section className="catalog-main-section"
         >
           {loading && (
             <p style={{ fontSize: "1.1rem", color: "#15353F", fontWeight: 500 }}>
@@ -232,17 +219,7 @@ export default function CatalogNewPage() {
           {!loading && !error && (
             <>
               {/* Repo count and Sort By area above the grid */}
-              <div
-                style={{
-                  width: "100%",
-                  marginBottom: "1.5rem",
-                  display: "grid",
-                  gridTemplateColumns: "auto 1fr auto",
-                  gap: "1.5rem",
-                  alignItems: "center",
-                  fontFamily: "Segoe UI, Inter, Arial, sans-serif"
-                }}
-              >
+              <div className="catalog-controls-grid">
                 <span
                   style={{
                     fontSize: "1.15rem",
@@ -364,16 +341,7 @@ export default function CatalogNewPage() {
                   />
                 </div>
               </div>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                  gap: "1.5rem",
-                  width: "100%",
-                  gridAutoRows: "1fr",
-                  alignItems: "stretch"
-                }}
-              >
+              <div className="catalog-grid">
                 {pagedRepos.map((repo: Repo) => (
                   <ProjectCard
                     key={repo.id}
