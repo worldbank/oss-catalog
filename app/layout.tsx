@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import FaviconLink from "./components/FaviconLink";
@@ -6,6 +6,12 @@ import FaviconLink from "./components/FaviconLink";
 export const metadata: Metadata = {
   title: "World Bank Open Source",
   description: "Discover open source projects, data, and research from the World Bank.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({

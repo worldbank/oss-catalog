@@ -4,6 +4,16 @@ body {
   overflow-x: hidden;
 }
 
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -21,7 +31,7 @@ body {
 }
 
 body {
-  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background: linear-gradient(135deg, #f5f7fa 0%, #e3eaf2 100%);
   min-height: 100vh;
   margin: 0;
