@@ -53,10 +53,10 @@ return (
       <section className="homepage-hero-section" aria-label="Hero section">
         {/* Hero text left */}
         <div className="homepage-hero-text">
-          <h1 className="hero-title" style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 600, color: '#15353F', letterSpacing: '-0.5px', marginBottom: '1rem' }}>
+          <h1 className="hero-title" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 600, color: '#15353F', letterSpacing: '-0.5px', marginBottom: '1rem' }}>
             World Bank and Open Source
           </h1>
-          <p className="hero-desc" style={{ fontSize: 'clamp(1rem, 2vw, 1.1rem)', color: '#616566ff', fontWeight: 400, lineHeight: 1.5, maxWidth: '1200px', marginBottom: 0 }}>
+          <p className="hero-desc" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontSize: 'clamp(1rem, 2vw, 1.1rem)', color: '#616566ff', fontWeight: 400, lineHeight: 1.5, maxWidth: '1200px', marginBottom: 0 }}>
             At the World Bank, we strive to cultivate open source development by building communities for support, maintenance and enhancement in addition to sharing knowledge and expertise in alignment with the Sustainable Development Goals.
             <br /><br />
             As a global knowledge bank, we champion transparency and collaboration by making high-quality information and open source tools accessible to all. Utilize our open data, software and research to drive evidence-based solutions and advance sustainable development worldwide.
@@ -94,8 +94,8 @@ return (
           </div>
           {/* Catalog info */}
           <div className="homepage-box-content">
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: '#15353F', marginBottom: '1rem' }}>Open Source Code Catalog</h3>
-            <p style={{ color: '#15353F', fontSize: '1rem', marginBottom: '1.5rem' }}>
+            <h3 style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontSize: '1.35rem', fontWeight: 600, color: '#15353F', marginBottom: '1rem' }}>Open Source Code Catalog</h3>
+            <p style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', color: '#15353F', fontSize: '1rem', marginBottom: '1.5rem' }}>
               Browse our open source code, filter by topic, language, and popularity, and find tools for you to use or contribute.
             </p>
             <Link
@@ -136,8 +136,8 @@ return (
           </div>
           {/* GitHub info */}
           <div className="homepage-box-content">
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 600, color: '#15353F', marginBottom: '1rem' }}>GitHub Organization</h3>
-            <p style={{ color: '#15353F', fontSize: '1rem', marginBottom: '1.5rem' }}>
+            <h3 style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontSize: '1.35rem', fontWeight: 600, color: '#15353F', marginBottom: '1rem' }}>GitHub Organization</h3>
+            <p style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', color: '#15353F', fontSize: '1rem', marginBottom: '1.5rem' }}>
               See all World Bank open source repositories, contribute, and join our developer community on GitHub.
             </p>
             <a

@@ -50,7 +50,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ repo, topic, setTopic }) => {
       >
         {repo.name}
       </a>
-  <p className="site-card-desc">
+  <p className="site-card-desc" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
         {repo.description
           ? repo.description.length > 150
             ? repo.description.slice(0, 147) + "..."

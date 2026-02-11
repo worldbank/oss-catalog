@@ -11,7 +11,7 @@ export default function Header() {
   <Link href="/" className="site-header-logo">
   <img src={getAssetPath("/img/wbg-logo.svg")} alt="World Bank White Logo" width="160" height="32" style={{ width: "160px", height: "auto", minHeight: "32px", display: "inline-block" }} />
   <span className="site-header-divider"></span>
-  <h1 className="site-header-title">Open Source</h1>
+  <h1 className="site-header-title" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Open Source</h1>
       </Link>
   <div className="site-header-nav site-header-nav-desktop">
   <Link href="/catalog" className="site-header-link">CODE CATALOG</Link>
