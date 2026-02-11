@@ -90,7 +90,7 @@ export default function CatalogNewPage() {
   return (
     <div
       style={{
-        fontFamily: "Segoe UI, Inter, Arial, sans-serif",
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -104,7 +104,7 @@ export default function CatalogNewPage() {
           <div className="catalog-hero-content">
             <h2
               style={{
-                fontFamily: 'Segoe UI',
+                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
                 fontSize: '2rem',
                 fontWeight: 600,
                 color: '#15353F',
@@ -118,7 +118,7 @@ export default function CatalogNewPage() {
             </h2>
             <p
               style={{
-                fontFamily: 'Segoe UI',
+                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
                 fontSize: '1rem',
                 color: '#444',
                 maxWidth: 700,

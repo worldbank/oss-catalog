@@ -9,6 +9,20 @@ import Link from "next/link";
 export default function NewPage() {
   const [recentProjects, setRecentProjects] = useState<{ name: string; html_url: string; description?: string; created_at?: string }[]>([]);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "World Bank",
+    "url": "https://opensource.worldbank.org",
+    "description": "World Bank open source projects, data, and research supporting sustainable development",
+    "sameAs": [
+      "https://github.com/worldbank",
+      "https://www.worldbank.org",
+      "https://data.worldbank.org",
+      "https://openknowledge.worldbank.org"
+    ]
+  };
+
   useEffect(() => {
   fetch(`${getAssetPath('/repos.json')}?v=${Date.now()}`)
       .then(res => res.json())
@@ -29,15 +43,19 @@ export default function NewPage() {
 
 return (
   <div className="new-page-root" style={{ background: '#e3ecf5ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
     <Header />
     {/* Hero Section with image to the right, full-bleed background */}
     <div style={{ width: '100vw', position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', background: '#fff', boxShadow: '0 2px 16px 0 rgba(21,53,63,0.06)' }}>
-      <section className="homepage-hero-section">
+      <section className="homepage-hero-section" aria-label="Hero section">
         {/* Hero text left */}
         <div className="homepage-hero-text">
-          <h2 className="hero-title" style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 600, color: '#15353F', letterSpacing: '-0.5px', marginBottom: '1rem' }}>
+          <h1 className="hero-title" style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 600, color: '#15353F', letterSpacing: '-0.5px', marginBottom: '1rem' }}>
             World Bank and Open Source
-          </h2>
+          </h1>
           <p className="hero-desc" style={{ fontSize: 'clamp(1rem, 2vw, 1.1rem)', color: '#616566ff', fontWeight: 400, lineHeight: 1.5, maxWidth: '1200px', marginBottom: 0 }}>
             At the World Bank, we strive to cultivate open source development by building communities for support, maintenance and enhancement in addition to sharing knowledge and expertise in alignment with the Sustainable Development Goals.
             <br /><br />
@@ -48,9 +66,10 @@ return (
         <div className="homepage-hero-image">
             <img
               src={getAssetPath("/img/code4.png")}
-              alt="Hero Background"
+              alt="World Bank open source software development and collaboration"
               width="600"
               height="600"
+              fetchPriority="high"
               style={{
                 maxHeight: '600px',
                 width: '90%',
@@ -64,14 +83,14 @@ return (
       </section>
     </div>
     {/* Main content area with margin */}
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+    <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
       {/* Two boxed areas side-by-side */}
-      <section className="homepage-boxes-section">
+      <section className="homepage-boxes-section" aria-label="Quick access to catalog and GitHub">
         {/* Software Catalog Box */}
-        <div className="homepage-box">
+        <article className="homepage-box">
           {/* Catalog image flush left */}
           <div className="homepage-box-image">
-            <img src={getAssetPath("/img/catalog.jpg")} alt="Catalog" width="200" height="260" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src={getAssetPath("/img/catalog.jpg")} alt="Browse World Bank open source code catalog" width="200" height="260" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           {/* Catalog info */}
           <div className="homepage-box-content">
@@ -108,12 +127,12 @@ return (
               Browse the Catalog &rarr;
             </Link>
           </div>
-        </div>
+        </article>
         {/* GitHub Organization Box */}
-        <div className="homepage-box">
+        <article className="homepage-box">
           {/* GitHub image flush left */}
           <div className="homepage-box-image" style={{ background: '#24292f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <img src={getAssetPath("/img/github.svg")} alt="GitHub" width="180" height="180" style={{ display: 'block' }} />
+            <img src={getAssetPath("/img/github.svg")} alt="GitHub logo - World Bank organization" width="180" height="180" loading="lazy" style={{ display: 'block' }} />
           </div>
           {/* GitHub info */}
           <div className="homepage-box-content">
@@ -151,12 +170,12 @@ return (
               Go to GitHub &rarr;
             </a>
           </div>
-        </div>
+        </article>
       </section>
-    </div>
+    </main>
     {/* Two-column section: Other Resources & Newest Additions (full-bleed) */}
     <div style={{ width: '100vw', position: 'relative', left: '50%', right: '50%', marginLeft: '-50vw', marginRight: '-50vw', background: '#fff', boxShadow: '0 2px 16px 0 rgba(21,53,63,0.06)' }}>
-      <section className="homepage-resources-section">
+      <section className="homepage-resources-section" aria-label="New additions and related resources">
   <div style={{ flex: 1.25, padding: '2.2rem 2rem 2.2rem 2rem', minHeight: 220, display: 'flex', flexDirection: 'column', background: '#f5f6f8', borderRadius: 10, boxShadow: '0 1px 8px rgba(25,118,210,0.07)' }}>
           <h3 style={{ fontSize: '1.3rem', fontWeight: 600, color: '#15353F', marginBottom: '0.3rem', letterSpacing: '-0.5px' }}>Newest Additions to the Catalog</h3>
           <div style={{ width: '100%', height: 3, background: 'linear-gradient(90deg, #1976d2 20%, #f5f6f8 100%)', borderRadius: 2, marginBottom: '1.7rem' }} />
@@ -167,7 +186,7 @@ return (
               recentProjects.map((repo) => (
                 <li key={repo.name} style={{ marginBottom: '1.25rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <img src={getAssetPath("/img/code-solid-full.svg")} alt="Repo" width="20" height="20" style={{ display: 'inline-block', verticalAlign: 'middle', opacity: 0.8 }} />
+                    <img src={getAssetPath("/img/code-solid-full.svg")} alt="Repository icon" width="20" height="20" loading="lazy" style={{ display: 'inline-block', verticalAlign: 'middle', opacity: 0.8 }} />
                     <a href={repo.html_url} target="_blank" rel="noopener noreferrer" style={{ color: '#1976d2', textDecoration: 'underline', fontWeight: 400, fontSize: '1.1rem' }}><b>{repo.name}</b></a>
                   </div>
                   <div style={{ color: '#616566', fontSize: '0.98rem', margin: '0.25rem 0 0.25rem 0' }}>

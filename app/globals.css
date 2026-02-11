@@ -11,7 +11,15 @@ body {
 
 html {
   -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
+}
+
+html, body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
@@ -37,6 +45,8 @@ body {
   margin: 0;
   color: var(--foreground);
   background: var(--background);
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .site-header {
@@ -97,7 +107,7 @@ body {
 }
 
 .site-header-title {
-  font-family: 'Segoe UI';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: -0.5px;
@@ -123,7 +133,7 @@ body {
 }
 
 .site-header-link {
-  font-family: 'Segoe UI';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: #fff;
   font-weight: 600;
   text-decoration: none;
@@ -196,7 +206,7 @@ body {
 
 /* Homepage styles */
 .homepage-root {
-  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -218,7 +228,7 @@ body {
   border-bottom: 1px solid #e3eaf2;
 }
 .hero-title {
-  font-family: 'Segoe UI';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 2rem;
   font-weight: 700;
   color: #15353F;
@@ -227,7 +237,7 @@ body {
   letter-spacing: -0.5px;
 }
 .hero-desc {
-  font-family: 'Segoe UI';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
   color: #444;
   max-width: 700px;
@@ -246,7 +256,7 @@ body {
   gap: 2.5rem;
 }
 .featured-title {
-  font-family: 'Segoe UI';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: #15353F;
@@ -297,7 +307,7 @@ section.hero {
 }
 
 h2 {
-  font-family: 'Segoe UI';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 2rem;
   font-weight: 700;
   color: #15353F;
@@ -307,7 +317,7 @@ h2 {
 }
 
 p {
-  font-family: 'Segoe UI';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
   color: #444;
   max-width: 700px;
@@ -324,7 +334,7 @@ p {
   background: #29303D;
   color: rgba(255, 255, 255, 1);
   font-size: .9rem;
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: none;
   align-items: center;
   justify-content: flex-start;
@@ -387,14 +397,14 @@ p {
   display: block;
 }
 .site-footer-agencies {
-  font-family: 'Segoe UI';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: rgba(255,255,255,0.5);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 1px;
 }
 .site-footer-copyright {
-  font-family: 'Segoe UI';
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   flex: 1;
   text-align: right;
   margin-right: 220px;
@@ -999,7 +1009,7 @@ p {
   grid-template-columns: auto 1fr auto;
   gap: 1.5rem;
   align-items: center;
-  font-family: Segoe UI, Inter, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* Mobile overrides for catalog */
@@ -1057,7 +1067,7 @@ p {
     justify-content: flex-start;
     width: 100%;
     max-width: 100%;
-    font-family: Segoe UI, Inter, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     box-sizing: border-box;
   }
 
@@ -1232,6 +1242,16 @@ p {
     margin-right: 0 !important;
     max-width: 100%;
     min-width: 100%;
+  }
+
+  .homepage-hero-text h1 {
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  .homepage-hero-text p {
+    font-size: clamp(0.95rem, 3vw, 1.05rem) !important;
+    line-height: 1.6 !important;
   }
 
   .homepage-hero-image img {
