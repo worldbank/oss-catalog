@@ -40,6 +40,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://opensource.worldbank.org',
   },
+  verification: {
+    google: '8A9d-Nrb99VOqWV8oHt7Bn8hhizp9iU0JBBMw-5zyoQ',
+  },
 };
 
 export const viewport: Viewport = {
