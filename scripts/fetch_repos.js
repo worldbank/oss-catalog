@@ -2,7 +2,7 @@ import fs from 'fs';
 import fetch from 'node-fetch';
 
 // Organizations to fetch repositories from
-const ORGANIZATIONS = ['worldbank'];
+const ORGANIZATIONS = ['worldbank','dime-worldbank'];
 
 async function fetchReposFromOrg(orgName) {
   let allRepos = [];
