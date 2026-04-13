@@ -71,6 +71,12 @@ async function fetchAllRepos() {
   });
   
   console.log(`Repos with catalog=true: ${catalogRepos.length}`);
+
+  // Abort if no catalog repos found to avoid wiping existing data
+  if (catalogRepos.length === 0 && existingRepos.length > 0) {
+    console.error('No catalog repos found but existing repos.json is non-empty. Aborting to prevent data loss.');
+    process.exit(1);
+  }
   
   // Add catalogAddedDate to each repo
   const currentDate = new Date().toISOString();
