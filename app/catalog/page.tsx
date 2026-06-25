@@ -100,6 +100,7 @@ export default function CatalogNewPage() {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
+        overflowX: "hidden",
         background: "linear-gradient(135deg, #f5f7fa 0%, #e3eaf2 100%)",
       }}
     >
