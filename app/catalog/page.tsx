@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Select from "react-select";
 
 import ProjectCard from "../components/ProjectCard";
@@ -22,16 +23,52 @@ interface Repo {
   catalogAddedDate?: string;
 }
 
-export default function CatalogNewPage() {
+const VALID_SORTS = ["stars", "forks", "created", "updated", "name"];
+
+function CatalogContent() {
+  const searchParams = useSearchParams();
   const [repos, setRepos] = useState<Repo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("stars");
-  const [language, setLanguage] = useState("");
-  const [topic, setTopic] = useState("");
-  const [page, setPage] = useState(1);
+  const initSort = searchParams.get("sort") ?? "stars";
+  const initPage = parseInt(searchParams.get("page") ?? "1", 10);
+  const [search, setSearch] = useState(searchParams.get("search") ?? "");
+  const [sort, setSort] = useState(VALID_SORTS.includes(initSort) ? initSort : "stars");
+  const [language, setLanguage] = useState(searchParams.get("language") ?? "");
+  const [topic, setTopic] = useState(searchParams.get("topic") ?? "");
+  const [page, setPage] = useState(isNaN(initPage) || initPage < 1 ? 1 : initPage);
   const pageSize = 12;
+
+  const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isInitialMount = useRef(true);
+
+  const updateURL = useCallback((currentSearch: string) => {
+    const params = new URLSearchParams();
+    if (currentSearch) params.set("search", currentSearch);
+    if (language) params.set("language", language);
+    if (topic) params.set("topic", topic);
+    if (sort && sort !== "stars") params.set("sort", sort);
+    if (page > 1) params.set("page", String(page));
+    const qs = params.toString();
+    window.history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : ""));
+  }, [language, topic, sort, page]);
+
+  // Debounced URL sync for search input
+  useEffect(() => {
+    if (isInitialMount.current) return;
+    if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
+    searchTimerRef.current = setTimeout(() => updateURL(search), 300);
+    return () => { if (searchTimerRef.current) clearTimeout(searchTimerRef.current); };
+  }, [search, updateURL]);
+
+  // Instant URL sync for non-search filters
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    updateURL(search);
+  }, [language, topic, sort, page]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     fetch(getAssetPath("/repos.json"))
@@ -420,5 +457,13 @@ export default function CatalogNewPage() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+export default function CatalogNewPage() {
+  return (
+    <Suspense>
+      <CatalogContent />
+    </Suspense>
   );
 }
