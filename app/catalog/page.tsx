@@ -31,12 +31,13 @@ function CatalogContent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const initSort = searchParams.get("sort") ?? "stars";
-  const initPage = parseInt(searchParams.get("page") ?? "1", 10);
+  const rawPage = searchParams.get("page");
+  const parsedPage = rawPage && /^\d+$/.test(rawPage) ? Number(rawPage) : 1;
   const [search, setSearch] = useState(searchParams.get("search") ?? "");
   const [sort, setSort] = useState(VALID_SORTS.includes(initSort) ? initSort : "stars");
   const [language, setLanguage] = useState(searchParams.get("language") ?? "");
   const [topic, setTopic] = useState(searchParams.get("topic") ?? "");
-  const [page, setPage] = useState(isNaN(initPage) || initPage < 1 ? 1 : initPage);
+  const [page, setPage] = useState(parsedPage < 1 ? 1 : parsedPage);
   const pageSize = 12;
 
   const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
