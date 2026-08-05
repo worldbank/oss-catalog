@@ -57,19 +57,31 @@ function CatalogContent() {
   // Debounced URL sync for search input
   useEffect(() => {
     if (isInitialMount.current) return;
+
     if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
-    searchTimerRef.current = setTimeout(() => updateURL(search), 300);
-    return () => { if (searchTimerRef.current) clearTimeout(searchTimerRef.current); };
+    searchTimerRef.current = setTimeout(() => {
+      searchTimerRef.current = null;
+      updateURL(search);
+    }, 300);
+
+    return () => {
+      if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
+      searchTimerRef.current = null;
+    };
   }, [search, updateURL]);
 
-  // Instant URL sync for non-search filters
+  // Instant URL sync for non-search filters (and pagination)
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
       return;
     }
+
+    // If a debounced search update is pending, let it own URL sync to avoid immediate churn.
+    if (searchTimerRef.current) return;
+
     updateURL(search);
-  }, [language, topic, sort, page]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [language, topic, sort, page, search, updateURL]);
 
   useEffect(() => {
     fetch(getAssetPath("/repos.json"))
