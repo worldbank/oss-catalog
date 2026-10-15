@@ -2,12 +2,15 @@
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { useEffect, useState } from "react";
-import { getAssetPath } from "./utils/paths";
 import Link from "next/link";
+import { byNewestInCatalog, useRepos } from "./utils/repos";
 
-export default function NewPage() {
-  const [recentProjects, setRecentProjects] = useState<{ name: string; html_url: string; description?: string; catalogAddedDate?: string }[]>([]);
+export default function HomePage() {
+  const { repos } = useRepos();
+  const recentProjects = repos
+    .filter(repo => repo.catalogAddedDate && repo.html_url)
+    .sort(byNewestInCatalog)
+    .slice(0, 3);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -23,32 +26,6 @@ export default function NewPage() {
     ]
   };
 
-  useEffect(() => {
-  fetch(`${getAssetPath('/repos.json')}?v=${Date.now()}`)
-      .then(res => res.json())
-      .then((data: { catalogAddedDate?: string; created_at?: string; name?: string; html_url?: string; description?: string }[]) => {
-        const sorted = data
-          .filter((repo) => repo.catalogAddedDate && repo.name && repo.html_url)
-          .sort((a, b) => {
-            // Sort by catalogAddedDate first (newest first)
-            const dateDiff = new Date(b.catalogAddedDate!).getTime() - new Date(a.catalogAddedDate!).getTime();
-            if (dateDiff !== 0) return dateDiff;
-            // If catalogAddedDate is the same, use created_at as tiebreaker (newest first)
-            const aCreated = a.created_at ? new Date(a.created_at).getTime() : 0;
-            const bCreated = b.created_at ? new Date(b.created_at).getTime() : 0;
-            return bCreated - aCreated;
-          })
-          .slice(0, 3)
-          .map((repo) => ({
-            name: repo.name!,
-            html_url: repo.html_url!,
-            description: typeof repo.description === 'string' ? repo.description : '',
-            catalogAddedDate: repo.catalogAddedDate
-          }));
-        setRecentProjects(sorted);
-      });
-  }, []);
-
 return (
   <div className="new-page-root" style={{ background: '#e3ecf5ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
     <script
@@ -61,10 +38,10 @@ return (
       <section className="homepage-hero-section" aria-label="Hero section">
         {/* Hero text left */}
         <div className="homepage-hero-text">
-          <h1 className="hero-title" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 600, color: '#15353F', letterSpacing: '-0.5px', marginBottom: '1rem' }}>
+          <h1 style={{ fontSize: 'clamp(2rem, 4vw, 2.8rem)', fontWeight: 600, color: '#15353F', letterSpacing: '-0.5px', marginBottom: '1rem' }}>
             World Bank and Open Source
           </h1>
-          <p className="hero-desc" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontSize: 'clamp(1rem, 2vw, 1.1rem)', color: '#616566ff', fontWeight: 400, lineHeight: 1.5, maxWidth: '1200px', marginBottom: 0 }}>
+          <p style={{ fontSize: 'clamp(1rem, 2vw, 1.1rem)', color: '#616566ff', fontWeight: 400, lineHeight: 1.5, maxWidth: '1200px', marginBottom: 0 }}>
             At the World Bank, we strive to cultivate open source development by building communities for support, maintenance and enhancement in addition to sharing knowledge and expertise in alignment with the Sustainable Development Goals.
             <br /><br />
             As a global knowledge bank, we champion transparency and collaboration by making high-quality information and open source tools accessible to all. Utilize our open data, software and research to drive evidence-based solutions and advance sustainable development worldwide.
@@ -73,7 +50,7 @@ return (
         {/* Hero image right */}
         <div className="homepage-hero-image">
             <img
-              src={getAssetPath("/img/code4.png")}
+              src="/img/code4.png"
               alt="World Bank open source software development and collaboration"
               width="600"
               height="600"
@@ -98,40 +75,15 @@ return (
         <article className="homepage-box">
           {/* Catalog image flush left */}
           <div className="homepage-box-image">
-            <img src={getAssetPath("/img/catalog.jpg")} alt="Browse World Bank open source code catalog" width="200" height="260" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+            <img src="/img/catalog.jpg" alt="Browse World Bank open source code catalog" width="200" height="260" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           </div>
           {/* Catalog info */}
           <div className="homepage-box-content">
-            <h3 style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontSize: '1.35rem', fontWeight: 600, color: '#15353F', marginBottom: '1rem' }}>Open Source Code Catalog</h3>
-            <p style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', color: '#15353F', fontSize: '1rem', marginBottom: '1.5rem' }}>
+            <h3 className="homepage-box-title">Open Source Code Catalog</h3>
+            <p className="homepage-box-text">
               Browse our open source code, filter by topic, language, and popularity, and find tools for you to use or contribute.
             </p>
-            <Link
-              href="/catalog"
-              style={{
-                fontWeight: 600,
-                fontSize: '1.1rem',
-                color: '#fff',
-                background: '#1976d2',
-                borderRadius: 6,
-                padding: '0.75rem 1.25rem',
-                textDecoration: 'none',
-                boxShadow: '0 1px 6px rgba(25,118,210,0.15)',
-                width: 'fit-content',
-                transition: 'background 0.18s, box-shadow 0.18s, transform 0.18s',
-                cursor: 'pointer',
-                display: 'block'
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = '#1565c0';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(25,118,210,0.22)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = '#1976d2';
-                e.currentTarget.style.boxShadow = '0 1px 6px rgba(25,118,210,0.15)';
-                e.currentTarget.style.transform = 'none';
-              }}
-            >
+            <Link href="/catalog" className="homepage-btn">
               Browse the Catalog &rarr;
             </Link>
           </div>
@@ -140,41 +92,15 @@ return (
         <article className="homepage-box">
           {/* GitHub image flush left */}
           <div className="homepage-box-image" style={{ background: '#24292f', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <img src={getAssetPath("/img/github.svg")} alt="GitHub logo - World Bank organization" width="180" height="180" loading="lazy" style={{ display: 'block' }} />
+            <img src="/img/github.svg" alt="GitHub logo - World Bank organization" width="180" height="180" loading="lazy" style={{ display: 'block' }} />
           </div>
           {/* GitHub info */}
           <div className="homepage-box-content">
-            <h3 style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontSize: '1.35rem', fontWeight: 600, color: '#15353F', marginBottom: '1rem' }}>GitHub Organization</h3>
-            <p style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', color: '#15353F', fontSize: '1rem', marginBottom: '1.5rem' }}>
+            <h3 className="homepage-box-title">GitHub Organization</h3>
+            <p className="homepage-box-text">
               See all World Bank open source repositories, contribute, and join our developer community on GitHub.
             </p>
-            <a
-              href="https://github.com/worldbank"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                fontWeight: 600,
-                fontSize: '1.1rem',
-                color: '#fff',
-                background: '#1976d2',
-                borderRadius: 6,
-                padding: '0.75rem 1.25rem',
-                textDecoration: 'none',
-                boxShadow: '0 1px 6px rgba(25,118,210,0.15)',
-                width: 'fit-content',
-                transition: 'background 0.18s, box-shadow 0.18s',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = '#1565c0';
-                e.currentTarget.style.boxShadow = '0 4px 12px rgba(25,118,210,0.22)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = '#1976d2';
-                e.currentTarget.style.boxShadow = '0 1px 6px rgba(25,118,210,0.15)';
-                e.currentTarget.style.transform = 'none';
-              }}
-            >
+            <a href="https://github.com/worldbank" target="_blank" rel="noopener noreferrer" className="homepage-btn">
               Go to GitHub &rarr;
             </a>
           </div>
@@ -194,7 +120,7 @@ return (
               recentProjects.map((repo) => (
                 <li key={repo.name} style={{ marginBottom: '1.25rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <img src={getAssetPath("/img/code-solid-full.svg")} alt="Repository icon" width="20" height="20" loading="lazy" style={{ display: 'inline-block', verticalAlign: 'middle', opacity: 0.8 }} />
+                    <img src="/img/code-solid-full.svg" alt="Repository icon" width="20" height="20" loading="lazy" style={{ display: 'inline-block', verticalAlign: 'middle', opacity: 0.8 }} />
                     <a href={repo.html_url} target="_blank" rel="noopener noreferrer" style={{ color: '#1976d2', textDecoration: 'underline', fontWeight: 400, fontSize: '1.1rem' }}><b>{repo.name}</b></a>
                   </div>
                   <div style={{ color: '#616566', fontSize: '0.98rem', margin: '0.25rem 0 0.25rem 0' }}>

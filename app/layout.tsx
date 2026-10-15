@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
-import FaviconLink from "./components/FaviconLink";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://opensource.worldbank.org'),
@@ -58,8 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <FaviconLink />
+      <body>
         <Script id="wbg-data-init" strategy="beforeInteractive" type="text/javascript">
           {`var wbgData = wbgData || {};
 wbgData.page = { pageInfo: { isDefaultPageName: "y", pageCategory: "home", contentType: "Homepage", channel: "its oss-catalog ext"}};

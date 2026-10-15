@@ -33,9 +33,6 @@ jobs:
           node-version: "20"
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        # Removed static_site_generator to prevent automatic basePath injection
-        # since we're using a custom domain at the root
-      # Remove package-lock.json to avoid internal registry references
       - name: Install dependencies
         run: npm install
       - name: Build with Next.js

@@ -1,6 +1,6 @@
+"use client";
+
 import React from "react";
-import "../globals.css";
-import { getAssetPath } from "../utils/paths";
 
 
 export default function Footer() {
@@ -12,7 +12,7 @@ export default function Footer() {
         onMouseEnter={() => setShowBar(true)}
         onMouseLeave={() => setShowBar(false)}
       >
-            <a href="https://www.worldbank.org/en/about/legal" target="_blank" rel="noopener noreferrer" className="site-footer-link" style={{ marginLeft: "200px" }}>Legal</a>
+            <a href="https://www.worldbank.org/en/about/legal" target="_blank" rel="noopener noreferrer" className="site-footer-link">Legal</a>
   <span className="site-footer-divider">|</span>
   <a href="https://www.worldbank.org/en/who-we-are/site-accessibility" target="_blank" rel="noopener noreferrer" className="site-footer-link">Site Accessibility</a>
   <span className="site-footer-divider">|</span>
@@ -30,7 +30,7 @@ export default function Footer() {
         onMouseLeave={() => setShowBar(false)}
       >
   <div className="site-footer-logo">
-          <img src={getAssetPath("/img/wbg-logo.svg")} alt="World Bank Group Logo" width="120" height="40" className="site-footer-img" />
+          <img src="/img/wbg-logo.svg" alt="World Bank Group Logo" width="120" height="40" className="site-footer-img" />
           <span className="site-footer-agencies">
             <a href="https://www.worldbank.org/en/who-we-are/ibrd" target="_blank" rel="noopener noreferrer" className="site-footer-link footer-agencies">IBRD</a>&nbsp;&nbsp;&nbsp;
             <a href="https://ida.worldbank.org/" target="_blank" rel="noopener noreferrer" className="site-footer-link footer-agencies">IDA</a>&nbsp;&nbsp;&nbsp;
