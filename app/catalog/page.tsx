@@ -1,35 +1,39 @@
 "use client";
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import Select from "react-select";
+import Select, { type StylesConfig } from "react-select";
 
 import ProjectCard from "../components/ProjectCard";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { getAssetPath } from "../utils/paths";
-
-interface Repo {
-  id: number;
-  name: string;
-  description?: string;
-  stargazers_count: number;
-  forks_count: number;
-  language?: string;
-  topics?: string[];
-  html_url?: string;
-  homepage?: string;
-  created_at?: string;
-  updated_at?: string;
-  catalogAddedDate?: string;
-}
+import Pagination from "../components/Pagination";
+import { byNewestInCatalog, getLanguages, getTopics, useRepos, type Repo } from "../utils/repos";
 
 const VALID_SORTS = ["stars", "forks", "created", "updated", "name"];
 
+const SORT_OPTIONS = [
+  { value: "name", label: "Name" },
+  { value: "stars", label: "Stars" },
+  { value: "forks", label: "Forks" },
+  { value: "created", label: "Published Date" },
+  { value: "updated", label: "Last Updated" },
+];
+
+type Option = { value: string; label: string };
+
+const filterSelectStyles: StylesConfig<Option, false> = {
+  control: (base) => ({ ...base, borderRadius: 8, borderColor: '#d0d7de', fontSize: '1rem', background: '#f7fafd', color: '#222', boxShadow: 'none', minHeight: 44, height: 44, paddingLeft: 8, width: 220 }),
+  menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+  singleValue: (base) => ({ ...base, color: '#222', paddingLeft: 4 }),
+  option: (base, state) => ({ ...base, color: '#222', backgroundColor: state.isFocused ? '#e3eaf2' : '#fff' }),
+  placeholder: (base) => ({ ...base, paddingLeft: 4 }),
+};
+
 function CatalogContent() {
   const searchParams = useSearchParams();
-  const [repos, setRepos] = useState<Repo[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+
+  const { repos, loading, error } = useRepos();
+
   const initSort = searchParams.get("sort") ?? "stars";
   const rawPage = searchParams.get("page");
   const parsedPage = rawPage && /^\d+$/.test(rawPage) ? Number(rawPage) : 1;
@@ -40,6 +44,7 @@ function CatalogContent() {
   const [page, setPage] = useState(parsedPage < 1 ? 1 : parsedPage);
   const pageSize = 12;
 
+  // Sync filter state → URL query params
   const searchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isInitialMount = useRef(true);
 
@@ -57,13 +62,11 @@ function CatalogContent() {
   // Debounced URL sync for search input
   useEffect(() => {
     if (isInitialMount.current) return;
-
     if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
     searchTimerRef.current = setTimeout(() => {
       searchTimerRef.current = null;
       updateURL(search);
     }, 300);
-
     return () => {
       if (searchTimerRef.current) clearTimeout(searchTimerRef.current);
       searchTimerRef.current = null;
@@ -76,28 +79,11 @@ function CatalogContent() {
       isInitialMount.current = false;
       return;
     }
-
     // If a debounced search update is pending, let it own URL sync to avoid immediate churn.
     if (searchTimerRef.current) return;
 
     updateURL(search);
   }, [language, topic, sort, page, search, updateURL]);
-
-  useEffect(() => {
-    fetch(getAssetPath("/repos.json"))
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to load repositories...");
-        return res.json();
-      })
-      .then((data) => {
-        setRepos(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
 
   const filteredRepos = repos
     .filter((repo: Repo) =>
@@ -109,17 +95,7 @@ function CatalogContent() {
     .sort((a: Repo, b: Repo) => {
       if (sort === "stars") return b.stargazers_count - a.stargazers_count;
       if (sort === "forks") return b.forks_count - a.forks_count;
-      if (sort === "created") {
-        // Sort by catalogAddedDate descending (newest first)
-        const aCatalogDate = a.catalogAddedDate ? new Date(a.catalogAddedDate).getTime() : 0;
-        const bCatalogDate = b.catalogAddedDate ? new Date(b.catalogAddedDate).getTime() : 0;
-        const dateDiff = bCatalogDate - aCatalogDate;
-        if (dateDiff !== 0) return dateDiff;
-        // If catalogAddedDate is the same, use created_at as tiebreaker (newest first)
-        const aCreated = a.created_at ? new Date(a.created_at).getTime() : 0;
-        const bCreated = b.created_at ? new Date(b.created_at).getTime() : 0;
-        return bCreated - aCreated;
-      }
+      if (sort === "created") return byNewestInCatalog(a, b);
       if (sort === "updated") {
         // Sort by updated_at descending (most recently updated first)
         const aDate = a.updated_at ? new Date(a.updated_at).getTime() : 0;
@@ -136,22 +112,17 @@ function CatalogContent() {
     setPage(1);
   }, [search, sort, language, topic]);
 
-  const languages = Array.from(new Set(repos.map((r: Repo) => r.language))).filter((lang): lang is string => !!lang);
-  const languageOptions = languages.map(lang => ({ value: lang, label: lang }));
-  const topics = Array.from(new Set(repos.flatMap((r: Repo) => r.topics || []))).sort();
-  const topicOptions = topics.map(topic => ({ value: topic, label: topic }));
-
-  // Removed unused variables: repoCount, totalStars, totalForks, mostPopularLanguage
+  const languageOptions = getLanguages(repos).map(lang => ({ value: lang, label: lang }));
+  const topicOptions = getTopics(repos).map(topic => ({ value: topic, label: topic }));
 
   return (
     <div
       style={{
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        overflowX: "hidden",
         background: "linear-gradient(135deg, #f5f7fa 0%, #e3eaf2 100%)",
+        overflowX: "hidden",
       }}
     >
       <Header />
@@ -161,7 +132,6 @@ function CatalogContent() {
           <div className="catalog-hero-content">
             <h2
               style={{
-                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
                 fontSize: '2rem',
                 fontWeight: 600,
                 color: '#15353F',
@@ -175,7 +145,6 @@ function CatalogContent() {
             </h2>
             <p
               style={{
-                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
                 fontSize: '1rem',
                 color: '#444',
                 maxWidth: 700,
@@ -191,7 +160,7 @@ function CatalogContent() {
               {/* Search */}
               <div style={{ position: 'relative', display: 'flex', alignItems: 'center', minHeight: 44 }}>
                 <img
-                  src={getAssetPath("/img/magnifying-glass.svg")}
+                  src="/img/magnifying-glass.svg"
                   alt="Search"
                   width="20"
                   height="20"
@@ -217,13 +186,7 @@ function CatalogContent() {
                   options={languageOptions}
                   value={language ? { value: language, label: language } : null}
                   onChange={option => setLanguage(option ? option.value : "")}
-                  styles={{
-                    control: (base) => ({ ...base, borderRadius: 8, borderColor: '#d0d7de', fontSize: '1rem', background: '#f7fafd', color: '#222', boxShadow: 'none', minHeight: 44, height: 44, paddingLeft: 8, width: 220 }),
-                    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-                    singleValue: (base) => ({ ...base, color: '#222', paddingLeft: 4 }),
-                    option: (base, state) => ({ ...base, color: '#222', backgroundColor: state.isFocused ? '#e3eaf2' : '#fff' }),
-                    placeholder: (base) => ({ ...base, paddingLeft: 4 })
-                  }}
+                  styles={filterSelectStyles}
                 />
               </div>
               {/* Topic filter */}
@@ -237,13 +200,7 @@ function CatalogContent() {
                   options={topicOptions}
                   value={topic ? { value: topic, label: topic } : null}
                   onChange={option => setTopic(option ? option.value : "")}
-                  styles={{
-                    control: (base) => ({ ...base, borderRadius: 8, borderColor: '#d0d7de', fontSize: '1rem', background: '#f7fafd', color: '#222', boxShadow: 'none', minHeight: 44, height: 44, paddingLeft: 8, width: 220 }),
-                    menuPortal: (base) => ({ ...base, zIndex: 9999 }),
-                    singleValue: (base) => ({ ...base, color: '#222', paddingLeft: 4 }),
-                    option: (base, state) => ({ ...base, color: '#222', backgroundColor: state.isFocused ? '#e3eaf2' : '#fff' }),
-                    placeholder: (base) => ({ ...base, paddingLeft: 4 })
-                  }}
+                  styles={filterSelectStyles}
                 />
               </div>
             </div>
@@ -298,59 +255,7 @@ function CatalogContent() {
                 </span>
                 {/* Centered Pagination */}
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                  {totalPages > 1 && (
-                    <ul className="pagination" style={{ margin: "0.5rem 0" }}>
-                      <li>
-                        <a
-                          href="#"
-                          onClick={e => { e.preventDefault(); setPage(page - 1); }}
-                          style={{ pointerEvents: page === 1 ? "none" : "auto", opacity: page === 1 ? 0.5 : 1 }}
-                        >Previous</a>
-                      </li>
-                      {/* Page number buttons with ellipsis */}
-                      {(() => {
-                        const pageButtons = [];
-                        const siblings = 2;
-                        if (totalPages <= 7) {
-                          for (let p = 1; p <= totalPages; p++) {
-                            pageButtons.push(p);
-                          }
-                        } else {
-                          pageButtons.push(1);
-                          if (page > siblings + 2) pageButtons.push('...');
-                          for (let p = Math.max(2, page - siblings); p <= Math.min(totalPages - 1, page + siblings); p++) {
-                            if (p === 2 && page > siblings + 2) pageButtons.push(2);
-                            pageButtons.push(p);
-                          }
-                          if (page < totalPages - siblings - 1) pageButtons.push('...');
-                          pageButtons.push(totalPages);
-                        }
-                        return pageButtons.map((p, idx) =>
-                          p === '...'
-                            ? <li key={"ellipsis-" + idx}><span style={{ padding: "0.5rem 0.75rem", color: "#888", fontWeight: 600 }}>...</span></li>
-                            : <li key={p}>
-                                <a
-                                  href="#"
-                                  onClick={e => { e.preventDefault(); if (typeof p === 'number') setPage(p); }}
-                                  style={{
-                                    fontWeight: p === page ? 700 : 400,
-                                    background: p === page ? "#e3eaf2" : undefined,
-                                    pointerEvents: p === page ? "none" : "auto",
-                                    opacity: p === page ? 0.7 : 1
-                                  }}
-                                >{p}</a>
-                              </li>
-                        );
-                      })()}
-                      <li>
-                        <a
-                          href="#"
-                          onClick={e => { e.preventDefault(); setPage(page + 1); }}
-                          style={{ pointerEvents: page === totalPages ? "none" : "auto", opacity: page === totalPages ? 0.5 : 1 }}
-                        >Next</a>
-                      </li>
-                    </ul>
-                  )}
+                  <Pagination page={page} totalPages={totalPages} onChange={setPage} style={{ margin: "0.5rem 0" }} />
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", justifyContent: "flex-end" }}>
                   <span style={{ fontSize: "1rem", color: "#15353F", fontWeight: 500 }}>Sort by:</span>
@@ -358,20 +263,8 @@ function CatalogContent() {
                     instanceId="sort-select"
                     inputId="sort"
                     isSearchable={false}
-                    options={[
-                      { value: "name", label: "Name" },
-                      { value: "stars", label: "Stars" },
-                      { value: "forks", label: "Forks" },
-                      { value: "created", label: "Published Date" },
-                      { value: "updated", label: "Last Updated" }
-                    ]}
-                    value={(() => {
-                      if (sort === "created") return { value: "created", label: "Published Date" };
-                      if (sort === "updated") return { value: "updated", label: "Last Updated" };
-                      if (sort === "stars") return { value: "stars", label: "Stars" };
-                      if (sort === "forks") return { value: "forks", label: "Forks" };
-                      return { value: "name", label: "Name" };
-                    })()}
+                    options={SORT_OPTIONS}
+                    value={SORT_OPTIONS.find(o => o.value === sort) ?? SORT_OPTIONS[0]}
                     onChange={option => setSort(option ? option.value : "stars")}
                     styles={{
                       control: (base) => ({
@@ -411,57 +304,7 @@ function CatalogContent() {
               {/* Pagination controls */}
               {totalPages > 1 && (
                 <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-                  <ul className="pagination" style={{ margin: "2rem 0" }}>
-                    <li>
-                      <a
-                        href="#"
-                        onClick={e => { e.preventDefault(); setPage(page - 1); }}
-                        style={{ pointerEvents: page === 1 ? "none" : "auto", opacity: page === 1 ? 0.5 : 1 }}
-                      >Previous</a>
-                    </li>
-                    {/* Page number buttons with ellipsis */}
-                    {(() => {
-                      const pageButtons = [];
-                      const siblings = 2;
-                      if (totalPages <= 7) {
-                        for (let p = 1; p <= totalPages; p++) {
-                          pageButtons.push(p);
-                        }
-                      } else {
-                        pageButtons.push(1);
-                        if (page > siblings + 2) pageButtons.push('...');
-                        for (let p = Math.max(2, page - siblings); p <= Math.min(totalPages - 1, page + siblings); p++) {
-                          if (p === 2 && page > siblings + 2) pageButtons.push(2);
-                          pageButtons.push(p);
-                        }
-                        if (page < totalPages - siblings - 1) pageButtons.push('...');
-                        pageButtons.push(totalPages);
-                      }
-                      return pageButtons.map((p, idx) =>
-                        p === '...'
-                          ? <li key={"ellipsis-" + idx}><span style={{ padding: "0.5rem 0.75rem", color: "#888", fontWeight: 600 }}>...</span></li>
-                          : <li key={p}>
-                              <a
-                                href="#"
-                                onClick={e => { e.preventDefault(); if (typeof p === 'number') setPage(p); }}
-                                style={{
-                                  fontWeight: p === page ? 700 : 400,
-                                  background: p === page ? "#e3eaf2" : undefined,
-                                  pointerEvents: p === page ? "none" : "auto",
-                                  opacity: p === page ? 0.7 : 1
-                                }}
-                              >{p}</a>
-                            </li>
-                      );
-                    })()}
-                    <li>
-                      <a
-                        href="#"
-                        onClick={e => { e.preventDefault(); setPage(page + 1); }}
-                        style={{ pointerEvents: page === totalPages ? "none" : "auto", opacity: page === totalPages ? 0.5 : 1 }}
-                      >Next</a>
-                    </li>
-                  </ul>
+                  <Pagination page={page} totalPages={totalPages} onChange={setPage} style={{ margin: "2rem 0" }} />
                 </div>
               )}
             </>

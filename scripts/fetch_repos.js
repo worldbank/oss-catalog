@@ -1,5 +1,4 @@
 import fs from 'fs';
-import fetch from 'node-fetch';
 
 // Organizations to fetch repositories from
 const ORGANIZATIONS = ['worldbank','dime-worldbank'];
