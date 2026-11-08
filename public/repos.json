@@ -123,7 +123,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -195,7 +196,7 @@
     "releases_url": "https://api.github.com/repos/worldbank/stata/releases{/id}",
     "deployments_url": "https://api.github.com/repos/worldbank/stata/deployments",
     "created_at": "2017-07-17T20:35:08Z",
-    "updated_at": "2026-10-22T20:19:12Z",
+    "updated_at": "2026-11-01T10:42:14Z",
     "pushed_at": "2026-02-26T07:26:53Z",
     "git_url": "git://github.com/worldbank/stata.git",
     "ssh_url": "git@github.com:worldbank/stata.git",
@@ -203,8 +204,8 @@
     "svn_url": "https://github.com/worldbank/stata",
     "homepage": "https://worldbank.github.io/stata/",
     "size": 13737,
-    "stargazers_count": 320,
-    "watchers_count": 320,
+    "stargazers_count": 321,
+    "watchers_count": 321,
     "language": null,
     "has_issues": true,
     "has_projects": true,
@@ -237,7 +238,7 @@
     "visibility": "public",
     "forks": 115,
     "open_issues": 1,
-    "watchers": 320,
+    "watchers": 321,
     "default_branch": "master",
     "permissions": {
       "admin": false,
@@ -247,7 +248,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -372,7 +374,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -497,7 +500,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -622,7 +626,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -694,7 +699,7 @@
     "releases_url": "https://api.github.com/repos/worldbank/stata-visual-library/releases{/id}",
     "deployments_url": "https://api.github.com/repos/worldbank/stata-visual-library/deployments",
     "created_at": "2020-07-31T13:44:21Z",
-    "updated_at": "2026-10-22T14:44:47Z",
+    "updated_at": "2026-11-04T11:57:52Z",
     "pushed_at": "2026-02-03T07:22:53Z",
     "git_url": "git://github.com/worldbank/stata-visual-library.git",
     "ssh_url": "git@github.com:worldbank/stata-visual-library.git",
@@ -702,8 +707,8 @@
     "svn_url": "https://github.com/worldbank/stata-visual-library",
     "homepage": "https://worldbank.github.io/stata-visual-library/",
     "size": 10427,
-    "stargazers_count": 97,
-    "watchers_count": 97,
+    "stargazers_count": 98,
+    "watchers_count": 98,
     "language": "Stata",
     "has_issues": true,
     "has_projects": true,
@@ -737,7 +742,7 @@
     "visibility": "public",
     "forks": 39,
     "open_issues": 7,
-    "watchers": 97,
+    "watchers": 98,
     "default_branch": "master",
     "permissions": {
       "admin": false,
@@ -747,7 +752,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -872,7 +878,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -997,7 +1004,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -1123,7 +1131,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -1196,13 +1205,13 @@
     "deployments_url": "https://api.github.com/repos/worldbank/blackmarblepy/deployments",
     "created_at": "2023-10-26T09:17:26Z",
     "updated_at": "2026-10-09T20:13:36Z",
-    "pushed_at": "2026-10-06T00:52:26Z",
+    "pushed_at": "2026-11-02T19:16:36Z",
     "git_url": "git://github.com/worldbank/blackmarblepy.git",
     "ssh_url": "git@github.com:worldbank/blackmarblepy.git",
     "clone_url": "https://github.com/worldbank/blackmarblepy.git",
     "svn_url": "https://github.com/worldbank/blackmarblepy",
     "homepage": "https://worldbank.github.io/blackmarblepy/",
-    "size": 57371,
+    "size": 57380,
     "stargazers_count": 66,
     "watchers_count": 66,
     "language": "Jupyter Notebook",
@@ -1216,7 +1225,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 11,
+    "open_issues_count": 13,
     "license": {
       "key": "mit",
       "name": "MIT License",
@@ -1244,7 +1253,7 @@
     ],
     "visibility": "public",
     "forks": 19,
-    "open_issues": 11,
+    "open_issues": 13,
     "watchers": 66,
     "default_branch": "main",
     "permissions": {
@@ -1255,7 +1264,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -1380,7 +1390,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -1504,7 +1515,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -1628,7 +1640,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -1752,7 +1765,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -1825,13 +1839,13 @@
     "deployments_url": "https://api.github.com/repos/worldbank/metadata-editor/deployments",
     "created_at": "2025-05-13T14:31:03Z",
     "updated_at": "2026-10-21T15:16:12Z",
-    "pushed_at": "2026-10-28T12:41:13Z",
+    "pushed_at": "2026-11-03T19:24:04Z",
     "git_url": "git://github.com/worldbank/metadata-editor.git",
     "ssh_url": "git@github.com:worldbank/metadata-editor.git",
     "clone_url": "https://github.com/worldbank/metadata-editor.git",
     "svn_url": "https://github.com/worldbank/metadata-editor",
     "homepage": "",
-    "size": 85308,
+    "size": 85314,
     "stargazers_count": 279,
     "watchers_count": 279,
     "language": "PHP",
@@ -1875,7 +1889,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -1998,7 +2013,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -2121,7 +2137,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -2244,7 +2261,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-01T00:00:00.000Z"
   },
@@ -2371,7 +2389,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-03-26T15:20:09.838Z"
   },
@@ -2498,7 +2517,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-05T00:00:00.000Z"
   },
@@ -2591,7 +2611,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 37,
+    "open_issues_count": 38,
     "license": {
       "key": "other",
       "name": "Other",
@@ -2618,7 +2638,7 @@
     ],
     "visibility": "public",
     "forks": 8,
-    "open_issues": 37,
+    "open_issues": 38,
     "watchers": 43,
     "default_branch": "dev",
     "permissions": {
@@ -2629,7 +2649,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-04-05T00:48:14.837Z"
   },
@@ -2756,7 +2777,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2025-12-03T00:00:00.000Z"
   },
@@ -2829,13 +2851,13 @@
     "deployments_url": "https://api.github.com/repos/worldbank/mega-gld/deployments",
     "created_at": "2025-11-18T15:46:28Z",
     "updated_at": "2026-10-07T20:15:13Z",
-    "pushed_at": "2026-10-13T19:55:28Z",
+    "pushed_at": "2026-11-02T15:24:04Z",
     "git_url": "git://github.com/worldbank/mega-gld.git",
     "ssh_url": "git@github.com:worldbank/mega-gld.git",
     "clone_url": "https://github.com/worldbank/mega-gld.git",
     "svn_url": "https://github.com/worldbank/mega-gld",
     "homepage": "",
-    "size": 418,
+    "size": 428,
     "stargazers_count": 1,
     "watchers_count": 1,
     "language": "R",
@@ -2881,7 +2903,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-04-12T00:50:22.977Z"
   },
@@ -3014,7 +3037,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-04-13T19:59:21.413Z"
   },
@@ -3141,7 +3165,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-02-17T00:00:00.000Z"
   },
@@ -3269,7 +3294,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-03-06T00:00:00.000Z"
   },
@@ -3395,7 +3421,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-02-09T00:00:00.000Z"
   },
@@ -3520,7 +3547,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-05-24T01:05:05.101Z"
   },
@@ -3592,14 +3620,14 @@
     "releases_url": "https://api.github.com/repos/worldbank/oss-catalog/releases{/id}",
     "deployments_url": "https://api.github.com/repos/worldbank/oss-catalog/deployments",
     "created_at": "2026-01-28T19:20:38Z",
-    "updated_at": "2026-10-25T00:45:16Z",
-    "pushed_at": "2026-10-31T23:55:39Z",
+    "updated_at": "2026-11-03T16:35:54Z",
+    "pushed_at": "2026-11-03T16:35:48Z",
     "git_url": "git://github.com/worldbank/oss-catalog.git",
     "ssh_url": "git@github.com:worldbank/oss-catalog.git",
     "clone_url": "https://github.com/worldbank/oss-catalog.git",
     "svn_url": "https://github.com/worldbank/oss-catalog",
     "homepage": "https://opensource.worldbank.org/",
-    "size": 16954,
+    "size": 16958,
     "stargazers_count": 2,
     "watchers_count": 2,
     "language": "TypeScript",
@@ -3613,7 +3641,7 @@
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 3,
+    "open_issues_count": 2,
     "license": {
       "key": "mit",
       "name": "MIT License",
@@ -3632,7 +3660,7 @@
     ],
     "visibility": "public",
     "forks": 3,
-    "open_issues": 3,
+    "open_issues": 2,
     "watchers": 2,
     "default_branch": "main",
     "permissions": {
@@ -3643,7 +3671,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-01-28T00:00:00.000Z"
   },
@@ -3773,7 +3802,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-02-09T00:00:00.000Z"
   },
@@ -3896,7 +3926,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-05-24T01:05:05.101Z"
   },
@@ -4023,7 +4054,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-03-18T20:05:24.548Z"
   },
@@ -4149,7 +4181,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-05-13T15:52:49.313Z"
   },
@@ -4272,7 +4305,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-05-03T00:59:23.523Z"
   },
@@ -4395,7 +4429,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-05-24T01:05:05.101Z"
   },
@@ -4528,7 +4563,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-11-01T00:33:39.100Z"
   },
@@ -4654,7 +4690,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-06-24T14:08:03.600Z"
   },
@@ -4778,7 +4815,8 @@
       "pull": true
     },
     "custom_properties": {
-      "catalog": "true"
+      "catalog": "true",
+      "posit": "false"
     },
     "catalogAddedDate": "2026-10-18T00:45:48.662Z"
   },
